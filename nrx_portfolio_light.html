@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9f5">
+  <meta name="description" content="NRX — Nurudeen Alani, software engineering student building useful digital experiences.">
+  <title>NRX — Developer Portfolio</title>
+  <style>
+    :root {
+      --site-background: #F7F9F5;
+      --site-primary: #246B45;
+      --site-secondary: #E7F1E8;
+      --site-on-primary: #FFFFFF;
+      --site-on-secondary: #183D2A;
+      --site-on-background: #17251D;
+      --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --site-heading-scale: 1;
+      --site-spacing-scale: 1;
+      --site-radius-scale: 1;
+      --site-decoration-opacity: 1;
+      --bg: light-dark(#F7F9F5, #101711);
+      --surface: light-dark(#FFFFFF, #18231B);
+      --surface-soft: light-dark(#EEF4EC, #202D23);
+      --text: light-dark(#17251D, #F0F5EF);
+      --muted: light-dark(#5D6B61, #B1BEB3);
+      --line: light-dark(#DCE5DA, #344337);
+      --green: light-dark(#246B45, #B9ED8A);
+      --green-ink: light-dark(#FFFFFF, #142318);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; color-scheme: light dark; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--site-font-body); line-height: 1.65; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .app { min-height: 100vh; background-color: var(--site-background); color: var(--site-on-background); }
+    @media (prefers-color-scheme: dark) {
+      .app { background-color: #101711; color: #F0F5EF; }
+    }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
+    .brand { font-size: 1.35rem; font-weight: 950; letter-spacing: -.08em; }
+    .brand span { color: var(--green); }
+    .nav-links { display: flex; align-items: center; gap: 25px; color: var(--muted); font-size: .92rem; }
+    .nav-links a:hover, .text-link:hover { color: var(--green); }
+    .button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; padding: 12px 18px; border-radius: calc(13px * var(--site-radius-scale)); background: var(--site-primary); color: var(--site-on-primary); border: 1px solid var(--site-primary); font-weight: 750; transition: transform .2s, opacity .2s; cursor: pointer; }
+    .button:hover { transform: translateY(-2px); opacity: .92; }
+    .button.secondary { color: var(--text); background: transparent; border-color: var(--line); }
+    .hero { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 54px; padding: 88px 0 100px; min-height: 570px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--green); text-transform: uppercase; letter-spacing: .15em; font-weight: 850; font-size: .75rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #4B9B64; box-shadow: 0 0 0 5px rgba(75,155,100,.13); }
+    h1, h2, h3 { font-family: var(--site-font-heading); line-height: 1.12; letter-spacing: -.045em; }
+    h1 { font-size: clamp(2.8rem, 6vw, 5.15rem); margin: 20px 0; max-width: 730px; }
+    h1 .accent { color: var(--green); }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 590px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-note { margin-top: 25px; font-size: .88rem; color: var(--muted); }
+    .hero-card { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 28px; box-shadow: 0 22px 70px rgba(25, 58, 36, .08); position: relative; overflow: hidden; }
+    .hero-card:before { content: ""; position: absolute; width: 220px; height: 220px; right: -90px; top: -100px; border-radius: 50%; background: var(--site-secondary); opacity: var(--site-decoration-opacity); }
+    .terminal-top { display: flex; align-items: center; gap: 7px; border-bottom: 1px solid var(--line); padding-bottom: 17px; margin-bottom: 20px; position: relative; }
+    .terminal-top i { width: 9px; height: 9px; display: block; border-radius: 50%; background: #A7B9A8; }
+    .terminal-top span { margin-left: auto; font-size: .75rem; color: var(--muted); }
+    .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9rem; line-height: 2; position: relative; }
+    .code .comment { color: #78907B; }
+    .code .key { color: #368A59; }
+    .code .string { color: #B26C31; }
+    .code .value { color: #4A7EC3; }
+    .mini-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 25px; }
+    .stat { border-radius: 13px; padding: 13px 10px; background: var(--surface-soft); }
+    .stat strong { display: block; font-size: 1rem; }
+    .stat span { display: block; color: var(--muted); font-size: .73rem; }
+    section { padding: 76px 0; scroll-margin-top: 22px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 22px; margin-bottom: 30px; }
+    .kicker { color: var(--green); font-size: .76rem; letter-spacing: .15em; text-transform: uppercase; font-weight: 850; }
+    h2 { font-size: clamp(2rem, 4vw, 3.1rem); margin: 8px 0 0; }
+    .section-intro { max-width: 570px; color: var(--muted); margin: 12px 0 0; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 24px; }
+    .panel { border: 1px solid var(--line); background: var(--surface); border-radius: 22px; padding: 27px; }
+    .about-mark { display: flex; align-items: center; justify-content: center; min-height: 250px; background: var(--site-secondary); color: var(--site-on-secondary); border-radius: 17px; font-size: clamp(3rem, 8vw, 5rem); font-weight: 950; letter-spacing: -.09em; }
+    .about-copy p { color: var(--muted); }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .chip { border: 1px solid var(--line); background: var(--surface-soft); padding: 7px 11px; border-radius: 999px; font-size: .84rem; font-weight: 650; }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .skill { padding: 21px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
+    .skill-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--site-secondary); color: var(--site-on-secondary); font-weight: 900; margin-bottom: 16px; }
+    .skill h3 { font-size: 1.05rem; letter-spacing: -.02em; margin: 0 0 7px; }
+    .skill p { color: var(--muted); font-size: .88rem; margin: 0; }
+    .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .project { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 21px; padding: 23px; min-height: 300px; }
+    .project-top { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+    .project-number { font: 800 .8rem ui-monospace, monospace; color: var(--muted); }
+    .status { font-size: .7rem; font-weight: 850; color: #8A5A1C; background: #FFF0D5; border-radius: 999px; padding: 5px 9px; }
+    .project h3 { font-size: 1.35rem; margin: 24px 0 10px; }
+    .project p { color: var(--muted); font-size: .92rem; margin: 0 0 20px; }
+    .project .chips { margin-top: auto; padding-top: 12px; }
+    .project .chip { font-size: .75rem; }
+    .project-link { margin-top: 20px; color: var(--green); font-weight: 800; font-size: .88rem; }
+    .contact-box { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 25px; padding: 38px; border-radius: 26px; background: var(--site-secondary); color: var(--site-on-secondary); }
+    .contact-box h2 { max-width: 640px; }
+    .contact-box p { max-width: 590px; opacity: .8; }
+    .contact-box .button { background: var(--site-primary); color: var(--site-on-primary); }
+    footer { border-top: 1px solid var(--line); padding: 24px 0 32px; color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .footer-links { display: flex; gap: 18px; }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; padding: 65px 0 75px; gap: 34px; }
+      .hero-card { max-width: 620px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects { grid-template-columns: repeat(2, 1fr); }
+      .contact-box { grid-template-columns: 1fr; }
+      .nav-links { gap: 13px; }
+      .nav-links a:nth-child(2) { display: none; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(var(--max), calc(100% - 28px)); }
+      .nav { min-height: 70px; }
+      .nav-links { font-size: .82rem; gap: 12px; }
+      .nav-links a:nth-child(3) { display: none; }
+      .nav .button { padding: 9px 12px; font-size: .82rem; }
+      .hero { padding: 53px 0 65px; }
+      .hero-card { padding: 19px; }
+      section { padding: 57px 0; }
+      .section-head { display: block; }
+      .skills-grid, .projects { grid-template-columns: 1fr; }
+      .project { min-height: 260px; }
+      .contact-box { padding: 25px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="wrap nav">
+      <a class="brand" href="#home" aria-label="NRX home">NR<span>X</span>.</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+      </nav>
+      <a class="button" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <div class="wrap">
+      <section class="hero" id="home">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Software Engineering Student</div>
+          <h1>Building useful things, <span class="accent">one line at a time.</span></h1>
+          <p class="lead">I'm Nurudeen Alani, also known as NRX — a software engineering student learning to turn ideas into practical digital experiences with code.</p>
+          <div class="hero-actions">
+            <a class="button" href="#projects">Explore my projects <span aria-hidden="true">↓</span></a>
+            <a class="button secondary" href="https://github.com/Nurex344" target="_blank" rel="noopener noreferrer">Visit my GitHub ↗</a>
+          </div>
+          <p class="hero-note">Open to learning opportunities, internships, and freelance collaborations.</p>
+        </div>
+        <aside class="hero-card" aria-label="Code introduction">
+          <div class="terminal-top"><i></i><i></i><i></i><span>nrx.py</span></div>
+          <div class="code">
+            <div><span class="comment"># A little about me</span></div>
+            <div><span class="key">developer</span> = <span class="string">"NRX"</span></div>
+            <div><span class="key">focus</span> = <span class="string">"Software Engineering"</span></div>
+            <div><span class="key">learning</span> = [</div>
+            <div>&nbsp;&nbsp;<span class="string">"Python"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="string">"HTML & CSS"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="string">"JavaScript"</span></div>
+            <div>]</div>
+            <div><span class="key">mindset</span> = <span class="value">keep_building</span>()</div>
+          </div>
+          <div class="mini-stats">
+            <div class="stat"><strong>Learn</strong><span>Every day</span></div>
+            <div class="stat"><strong>Build</strong><span>By doing</span></div>
+            <div class="stat"><strong>Improve</strong><span>Each version</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about">
+        <div class="section-head">
+          <div><div class="kicker">A little introduction</div><h2>About me</h2></div>
+        </div>
+        <div class="about-grid">
+          <div class="panel"><div class="about-mark" aria-label="NRX initials">NRX</div></div>
+          <div class="panel about-copy">
+            <h3>Curious mind. Practical builder.</h3>
+            <p>I'm studying Software Engineering and growing my skills through practice, personal projects, and problem-solving. I enjoy exploring how software can make everyday tasks easier, especially for students and campus communities.</p>
+            <p>I'm currently strengthening my programming foundations and working toward building reliable, user-friendly websites and applications. I'm happy to connect with people who want to learn, collaborate, or build something useful.</p>
+            <div class="chips"><span class="chip">Student developer</span><span class="chip">Problem-solving</span><span class="chip">Always learning</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-head">
+          <div><div class="kicker">My toolkit</div><h2>Skills I'm building</h2><p class="section-intro">A snapshot of the tools I know and am actively improving. I'll update this section as I grow.</p></div>
+        </div>
+        <div class="skills-grid">
+          <article class="skill"><div class="skill-icon">Py</div><h3>Python</h3><p>Programming fundamentals, functions, classes, and object-oriented programming practice.</p></article>
+          <article class="skill"><div class="skill-icon">H</div><h3>HTML</h3><p>Structuring clear, accessible web pages with semantic markup.</p></article>
+          <article class="skill"><div class="skill-icon">CSS</div><h3>CSS</h3><p>Styling responsive layouts and improving the look and feel of websites.</p></article>
+          <article class="skill"><div class="skill-icon">JS</div><h3>JavaScript</h3><p>Learning browser interactivity and the logic behind dynamic websites.</p></article>
+          <article class="skill"><div class="skill-icon">M</div><h3>Microsoft Office</h3><p>Working with documents, presentations, and everyday productivity tools.</p></article>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-head">
+          <div><div class="kicker">Ideas in progress</div><h2>Projects & concepts</h2><p class="section-intro">These are concepts and learning projects, not claims of finished products. I'll replace each status with a live demo or repository when the work is ready.</p></div>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <div class="project-top"><span class="project-number">PROJECT 01</span><span class="status">Concept</span></div>
+            <h3>Campus Student Hub</h3>
+            <p>A central place for students to find campus updates, useful resources, and student-focused services.</p>
+            <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+            <span class="project-link">Planned project · Not yet presented as complete</span>
+          </article>
+          <article class="project">
+            <div class="project-top"><span class="project-number">PROJECT 02</span><span class="status">Concept</span></div>
+            <h3>Python CGPA Calculator</h3>
+            <p>A simple tool to help students enter course grades and calculate a semester GPA or CGPA.</p>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Logic</span><span class="chip">Validation</span></div>
+            <span class="project-link">Planned project · Not yet presented as complete</span>
+          </article>
+          <article class="project">
+            <div class="project-top"><span class="project-number">PROJECT 03</span><span class="status">Concept</span></div>
+            <h3>Online Course Registration</h3>
+            <p>A student-focused registration workflow concept for selecting courses and reviewing a course list.</p>
+            <div class="chips"><span class="chip">Web development</span><span class="chip">UI/UX</span></div>
+            <span class="project-link">Academic project concept · Build and test before publishing</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact-box">
+          <div>
+            <div class="kicker">Let's talk</div>
+            <h2>Have an idea or an opportunity?</h2>
+            <p>I'm interested in meeting other developers, learning from experienced teams, and collaborating on useful projects. Reach out through GitHub to start a conversation.</p>
+          </div>
+          <a class="button" href="https://github.com/Nurex344" target="_blank" rel="noopener noreferrer">Connect on GitHub ↗</a>
+        </div>
+      </section>
+    </div>
+
+    <footer><div class="wrap footer-inner"><span>© <span id="year"></span> NRX · Built with curiosity and code.</span><div class="footer-links"><a href="https://github.com/Nurex344" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#home">Back to top ↑</a></div></div></footer>
+  </main>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
